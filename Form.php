@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Form.class.php
+ * Form.php
  *
  * @author ykiwng
- * @see http://www.github.com/creasty/Form
+ * @see https://github.com/creasty/form-php
  */
 
 mb_language('ja');
@@ -170,7 +170,7 @@ class Form {
 			$header[] = 'Cc: ' . $arg['cc'];
 
 		if ($arg['bcc'])
-			$header[] = 'Bcc: ' . $arg['bbc'];
+			$header[] = 'Bcc: ' . $arg['bcc'];
 
 		if ($arg['reply'])
 			$header[] = 'Reply-To: ' . $arg['reply'];
