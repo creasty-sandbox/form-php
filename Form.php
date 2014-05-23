@@ -175,6 +175,7 @@ class Form {
 		if ($arg['reply'])
 			$header[] = 'Reply-To: ' . $arg['reply'];
 
+		$header = array_map(array(&$this, 'remove_line_feeds'), $header);
 		$header = implode("\n", $header);
 
 		if (!$arg['to'])
@@ -185,6 +186,10 @@ class Form {
 			$mail_to = $data[$arg['to']];
 
 		return @mb_send_mail($mail_to, $subject, $body, $header);
+	}
+
+	private function remove_line_feeds($str) {
+		return str_replace(array("\r\n","\r","\n"), '', $str);
 	}
 
 	public function post_process() {
