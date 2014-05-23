@@ -1,9 +1,11 @@
-# Form.php
+form-php
+========
 
 スタイリッシュなシンタックスが特徴のフォームバリデーションライブラリです。
 
 
-# 特徴
+特徴
+----
 
 - チェーンメソッドを使った簡単なシンタックス
 - バリデーションのルールとフォームの HTML のロジックが分離されている
@@ -15,8 +17,8 @@
 - CAPTCHA 対応 (スパム対策)
 
 
-
-# Quick Start
+Quick Start
+-----------
 
 ファイルの一番最初でバリデーションのルールを設定します。
 
@@ -131,7 +133,9 @@ Message:
 </script>
 ```
 
-# 初期化
+
+初期化
+------
 
 ```php
 $cf = new Form($config);
@@ -172,9 +176,14 @@ $cf = new Form($config);
 	</tr>
 </table>
 
-# バリデーションルールの設定
 
-## 新しいルールを作る
+
+
+バリデーションルールの設定
+==========================
+
+新しいルールを作る
+------------------
 
 ### 普通のフィールド
 
@@ -210,7 +219,9 @@ $cf->add_captcha();
 
 これだけです。
 
-## set_option
+
+set_option
+----------
 
 &lt;input type="checkbox"&gt;, &lt;input type="radio"&gt;, &lt;select&gt; に、選択できる項目を設定します。
 
@@ -242,7 +253,9 @@ $cf->add('color+')->set_option(array(
 ));
 ```
 
-## required
+
+required
+--------
 
 項目を必須にします。
 
@@ -273,7 +286,8 @@ $cf->add('foo', true)
 ```
 
 
-## minlen / maxlen
+minlen / maxlen
+---------------
 
 ``minlen`` と ``maxlen`` は入力された文字列の長さの下限と上限を指定します。
 
@@ -297,7 +311,8 @@ $cf->add('foo')->minlen(40)
 </table>
 
 
-## mininum / maximum
+mininum / maximum
+-----------------
 
 ``mininum`` と ``maximum`` は入力された値を数値として評価し、その値の下限と上限を指定します。
 
@@ -321,7 +336,8 @@ $cf->add('foo')->maximum(40)
 </table>
 
 
-## minselect / maxselect / select
+minselect / maxselect / select
+------------------------------
 
 ``mininum`` と ``maximum`` は複数の値が選択できる項目の場合(&lt;input type="checkbox"&gt;, &lt;select&gt;)に、選択できる個数の下限と上限を指定します。
 
@@ -351,7 +367,8 @@ $cf->add('foo+')->set_option(array(
 </table>
 
 
-## filter
+filter
+------
 
 高度なバリデーションルールを設定します。
 
@@ -390,7 +407,9 @@ $cf->add('foo')->filter('datetime', 'Y-m-d')
 $cf->add('foo')->filter('datetime', 'H:i:s')
 ```
 
-## type
+
+type
+----
 
 機能は ``filter`` とほとんど同じですが、フォームの要素の ``type`` 属性に値を設定する点において異なります。
 
@@ -415,7 +434,9 @@ $cf->add('foo')->type('tel')
 $cf->add('foo')->type('url')
 ```
 
-## format
+
+format
+------
 
 値を判定するのではなく、加工します。主にデータの正規化に利用します。
 
@@ -437,7 +458,11 @@ $cf->add('foo')->format('kana', 'asKV')
 $cf->add('foo')->format('datetime', 'Y/m/d H:i')
 ```
 
-# filter / format で独自関数をつかう
+
+
+
+filter / format で独自関数をつかう
+==================================
 
 関数の命名規則は ``validation_filter_{name}`` です。
 関数の呼び出しには、つぎの引数が渡されます。
@@ -482,9 +507,14 @@ function validation_filter_upper($call, $val, $args = array()) {
 }
 ```
 
-# HTML ヘルパー
 
-## テキスト
+
+
+HTML ヘルパー
+=============
+
+テキスト
+--------
 
 ```php
 <?php $cf->html->text('foo'); ?>
@@ -496,7 +526,9 @@ function validation_filter_upper($call, $val, $args = array()) {
 <input type="text" name="cf-foo" id="cf-foo" />
 ```
 
-## テキストエリア
+
+テキストエリア
+--------------
 
 ```php
 <?php $cf->html->textarea('foo'); ?>
@@ -508,7 +540,9 @@ function validation_filter_upper($call, $val, $args = array()) {
 <textarea name="cf-foo" id="cf-foo"></textarea>
 ```
 
-## チェックボックス / ラジオボタン
+
+チェックボックス / ラジオボタン
+-------------------------------
 
 出力がチェックボックスかラジオボタンかは、名前の語尾に ``+`` があるかどうかで自動で判断します。
 
@@ -533,7 +567,8 @@ function validation_filter_upper($call, $val, $args = array()) {
 ```
 
 
-## セレクトボックス
+セレクトボックス
+----------------
 
 名前の語尾に ``+`` がある場合は自動で ``multiple`` 属性が追加されます。
 
@@ -557,7 +592,8 @@ function validation_filter_upper($call, $val, $args = array()) {
 </select>
 ```
 
-## CAPTCHA の画像と入力フィールド
+CAPTCHA の画像と入力フィールド
+------------------------------
 
 ```php
 <div><?php $cf->html->captcha_image(); ?></div>
@@ -571,9 +607,14 @@ function validation_filter_upper($call, $val, $args = array()) {
 <input type="text" name="cf-captcha" id="cf-captcha" />
 ```
 
-# フォーム処理
 
-## メール送信
+
+
+フォーム処理
+============
+
+メール送信
+----------
 
 初期化の時に ``'mail' => true`` を設定していることを確認する。
 
@@ -661,7 +702,9 @@ $cf->add('foo')
 	</tr>
 </table>
 
-## メール以外での処理
+
+メール以外での処理
+------------------
 
 ``Form`` クラスを直接使わずに、extends して新しいクラスを作って、それを使って下さい。
 
